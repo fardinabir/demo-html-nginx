@@ -20,4 +20,3 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tags: latest
-        platform: linux/arm64 # Specify ARM architecture here
