@@ -1,0 +1,22 @@
+name: Deploy to EC2
+
+on:
+  workflow-run:
+    workflows: ["Demo HTML Nginx"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Pull Docker Image
+      run: sudo docker pull fardinabir/demo-html-nginx:latest
+
+    - name: Delete Old Docker Container
+      run: sudo docker rm -f demo-html-nginx-container || true
+
+    - name: Run Docker Container
+      run: sudo docker run -d --name demo-html-nginx-container -p 3000:80 fardinabir/demo-html-nginx:latest
+      
